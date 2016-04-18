@@ -1,19 +1,15 @@
 "================Vim Plug=======================+
 call plug#begin('~/.nvim/plugged')
-
-Plug 'https://github.com/noahfrederick/vim-hemisu.git' "really good light and dark theme
-Plug 'https://github.com/reedes/vim-colors-pencil.git' "light theme
-Plug 'https://github.com/junegunn/seoul256.vim.git' "light and dark theme
+Plug 'reedes/vim-colors-pencil' "for airline theme
+Plug 'junegunn/seoul256.vim' "light and dark theme
 Plug 'junegunn/vim-easy-align' "really nice aligning
 Plug 'https://github.com/tpope/vim-fugitive.git' "cool git plugin
-Plug 'https://github.com/scrooloose/nerdtree.git' "better file tree
+Plug 'https://github.com/scrooloose/nerdtree.git' "File tree for browsing files in a prettier manor
 Plug 'https://github.com/tpope/vim-repeat.git' "plugins repeat too
 Plug 'https://github.com/terryma/vim-multiple-cursors.git' "multiple cursors like sublimetext
 Plug 'vim-airline/vim-airline' " fancy status bar
-Plug 'vim-airline/vim-airline-themes' "fancy status bar themes
 Plug 'https://github.com/mbbill/undotree.git' "cool undo tree
-Plug 'https://github.com/vim-scripts/diffchar.vim.git' "makes diff more usefull
-"c++ plugins
+"c/c++ plugins
 Plug 'octol/vim-cpp-enhanced-highlight' "better syntax hilighting
 Plug 'a.vim' "alternate between header files easially :A, :AS to split and switch
 Plug 'justmao945/vim-clang'
@@ -24,10 +20,14 @@ Plug 'wlangstroth/vim-racket'
 "Rust
 Plug 'rust-lang/rust.vim' "Rust language support
 Plug 'racer-rust/vim-racer' "Rust auto complete
-
 Plug 'ctrlpvim/ctrlp.vim'
 "scheme
 Plug 'kien/rainbow_parentheses.vim'
+"fsharp
+Plug 'fsharp/vim-fsharp', {
+      \ 'for': 'fsharp',
+      \ 'do':  'make fsautocomplete',
+      \}
 call plug#end()
 "+==============stop the trainwreck==============+
 
@@ -139,9 +139,9 @@ autocmd BufRead,BufNewFile !(*.cpp || *.c || *.h || *.rs || *.rkt) let g:deoplet
 "close vim if nerdtree is the last thing open
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 "space o toggle nerdtre
-map <Leader>2 :NERDTreeToggle<CR>
+map <Leader>1 :NERDTreeToggle<CR>
 "+==========Rainbow Parenthesis=======+"
-au VimEnter *.rkt RainbowParenthesesToggle
+au VimEnter *.rkt,*.xml,*.html,*.clj RainbowParenthesesToggle
 au Syntax * RainbowParenthesesLoadRound
 au Syntax * RainbowParenthesesLoadSquare
 au Syntax * RainbowParenthesesLoadBraces
@@ -166,14 +166,14 @@ let g:rbpt_colorpairs = [
     \ ]
 
 "+===========Tagbar============+"
-nnoremap <Leader>1 :TagbarToggle<CR>
+nnoremap <Leader>2 :TagbarToggle<CR>
+"+==========Undo Tree=========+
+nnoremap <Leader>3 :UndotreeToggle<CR>
 "+===============airline==============+
 let g:airline#extensions#tabline#enabled = 1
 let g:airline_theme='pencil'
 "turn off this awful feature
 let g:airline#extensions#whitespace#enabled = 0
-"+=============Undo Tree==========+
-nnoremap <F5> :UndotreeToggle<cr>
 "+==============Vim Racer========+
 set hidden
 let g:racer_cmd = "/usr/bin/racer"
