@@ -1,7 +1,7 @@
 "================Vim Plug=======================+
 call plug#begin('~/.nvim/plugged')
 Plug 'reedes/vim-colors-pencil' "for airline theme
-Plug 'junegunn/seoul256.vim' "light and dark theme
+Plug 'junegunn/seoul256.vim' "best light theme
 Plug 'junegunn/vim-easy-align' "really nice aligning
 Plug 'https://github.com/tpope/vim-fugitive.git' "cool git plugin
 Plug 'https://github.com/scrooloose/nerdtree.git' "File tree for browsing files in a prettier manor
@@ -9,19 +9,25 @@ Plug 'https://github.com/tpope/vim-repeat.git' "plugins repeat too
 Plug 'https://github.com/terryma/vim-multiple-cursors.git' "multiple cursors like sublimetext
 Plug 'vim-airline/vim-airline' " fancy status bar
 Plug 'https://github.com/mbbill/undotree.git' "cool undo tree
+Plug 'https://github.com/Shougo/unite.vim' "fuzzy search
+Plug 'ervandew/supertab' "makes tab instead of the awful c-x c-o for omnicompleation
 "c/c++ plugins
 Plug 'octol/vim-cpp-enhanced-highlight' "better syntax hilighting
 Plug 'a.vim' "alternate between header files easially :A, :AS to split and switch
 Plug 'justmao945/vim-clang'
 Plug 'majutsushi/tagbar'
-"Autocomplete
-Plug 'Shougo/deoplete.nvim'
+"Autocomplete - for languages without their own system 
+function! DoRemote(arg)
+  UpdateRemotePlugins
+endfunction
+Plug 'Shougo/deoplete.nvim', { 'do': function('DoRemote') }
+"Racket
 Plug 'wlangstroth/vim-racket'
 "Rust
 Plug 'rust-lang/rust.vim' "Rust language support
-Plug 'racer-rust/vim-racer' "Rust auto complete
-Plug 'ctrlpvim/ctrlp.vim'
-"scheme
+"Plug 'racer-rust/vim-racer' "Rust auto complete
+Plug 'ebfe/vim-racer'
+"scheme/HTML
 Plug 'kien/rainbow_parentheses.vim'
 "fsharp
 Plug 'fsharp/vim-fsharp', {
@@ -42,10 +48,12 @@ colorscheme seoul256-light
 set background=light "changes to light
 let g:seoul256_background = 256
 colo seoul256 "make it lighter
-"tab width = 3 spaces
-set tabstop=3
-set shiftwidth=3
-set softtabstop=3
+"tab width = 4 spaces
+set tabstop=4
+set shiftwidth=4
+set softtabstop=4
+"spaces if fsharp
+autocmd BufRead,BufNewFile *.fsi,*.fs :set expandtab
 
 set smarttab
 "can make windows size zero
@@ -54,9 +62,8 @@ set winminheight=0
 "====================Keybinds==================+
 "this makes me not have to use esc yay
 imap jj <Esc>
-"` is the more usefull key soooo
-"nnoremap ' `
-"nnoremap	` '
+"make control b bd
+nnoremap <C-b> :bd<CR>
 "make it scroll more
 nnoremap <C-e> 3<C-e>
 nnoremap <C-y> 3<C-y>
@@ -65,32 +72,24 @@ nnoremap <C-y> 3<C-y>
 let mapleader = "`"
 
 "move between windows with control+hjkl
-nmap <silent> <C-k> :wincmd k<CR>
-nmap <silent> <C-j> :wincmd j<CR>
-nmap <silent> <C-h> :wincmd h<CR>
-nmap <silent> <C-l> :wincmd l<CR>
+"nmap <silent> <C-k> :wincmd k<CR>
+"nmap <silent> <C-j> :wincmd j<CR>
+"nmap <silent> <C-h> :wincmd h<CR>
+"nmap <silent> <C-l> :wincmd l<CR>
 "window control
 nmap <silent> <Leader>s :split<CR>
 nmap <silent> <Leader>v :vsplit<CR>
-"easy window resize
 
 "easy save
-nmap <silent> <Leader>w :w<CR>
-nmap <silent> <Leader>x :x<CR>
+nmap <C-s> :w<CR>
 
-"easy spell check
-nmap <silent> <Leader>u z=
-
-"strip html
-nmap <silent> <Leader>h :%s#<[^>]\+>##g<CR>
 "+=================general changes=============+
-
-"change timeout
+"change timeout of leader key
 set ttimeout
 set ttimeoutlen=50
 
-"longer history note:totally not excessive
-set history=2000
+"excessively longer history
+set history=1000
 
 "show other things in complete menu
 set wildmenu
@@ -134,7 +133,8 @@ nnoremap <leader>gp :Gpush<CR>
 let g:clang_c_options = '-std=gnu11'
 let g:clang_cpp_options = '-std=c++14'
 "===============Deoplete===============+
-autocmd BufRead,BufNewFile !(*.cpp || *.c || *.h || *.rs || *.rkt) let g:deoplete#enable_at_startup = 1
+"autocmd BufRead,BufNewFile ! *.{cpp,c,h,rs,rkt,fs,fsi,txt,md,tex} let g:deoplete#enable_at_startup = 1
+let g:deoplete#enable_at_startup = 0
 "+===============Nerdtree=============+
 "close vim if nerdtree is the last thing open
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
@@ -144,7 +144,7 @@ map <Leader>1 :NERDTreeToggle<CR>
 au VimEnter *.rkt,*.xml,*.html,*.clj RainbowParenthesesToggle
 au Syntax * RainbowParenthesesLoadRound
 au Syntax * RainbowParenthesesLoadSquare
-au Syntax * RainbowParenthesesLoadBraces
+au Syntax * RainbowParenthesesLoadBrnnoremap <C-k> aces
   "the colors for it
 let g:rbpt_colorpairs = [
     \ ['brown',       'RoyalBlue3'],
@@ -191,5 +191,12 @@ let $RUST_SRC_PATH="/usr/src/rust/src"
         \'i:impls,trait implementations',
     \]
     \}
+"+===========Unite==========+
+call unite#filters#matcher_default#use(['matcher_fuzzy'])
+call unite#filters#sorter_default#use(['sorter_rank'])
+call unite#custom#source('file,file/new,buffer,file_rec,line', 'matchers', 'matcher_fuzzy')
+nnoremap <C-k> :<C-u>Unite -buffer-name=search -start-insert line<cr>
+"+=====Super Tab======+
+let g:SuperTabDefaultCompletionType = "<c-x><c-o>"
 "Fix problems with permissions
 set backupdir=~/.config/nvim/backup

@@ -77,7 +77,6 @@ bindsym $mod+Shift+q kill
 #bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
 bindsym $mod+d exec rofi -show run -font "Office Code Pro 25" -fg "argb:FF0099BB" -bg "argb:55EEEEEE" -hlfg "argb:FF006699" -hlbg "argb:FFDDDDDD" -fake-transparency
 bindsym $mod+w exec rofi -show window -font "Office Code Pro 25" -fg "argb:FF0099BB" -bg "argb:55EEEEEE" -hlfg "argb:FF006699" -hlbg "argb:FFDDDDDD" -fake-transparency
-
 # change focus
 bindsym $mod+h focus left
 bindsym $mod+j focus down
