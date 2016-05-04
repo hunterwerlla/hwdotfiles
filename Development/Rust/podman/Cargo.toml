@@ -1,6 +1,0 @@
-[package]
-name = "podman"
-version = "0.1.0"
-authors = ["Hunter Werlla <Hunter@werlla.com>"]
-
-[dependencies]

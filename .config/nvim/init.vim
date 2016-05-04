@@ -25,15 +25,15 @@ Plug 'Shougo/deoplete.nvim', { 'do': function('DoRemote') }
 Plug 'wlangstroth/vim-racket'
 "Rust
 Plug 'rust-lang/rust.vim' "Rust language support
-"Plug 'racer-rust/vim-racer' "Rust auto complete
+"Rust auto complete
 Plug 'ebfe/vim-racer'
-"scheme/HTML
-Plug 'kien/rainbow_parentheses.vim'
 "fsharp
 Plug 'fsharp/vim-fsharp', {
       \ 'for': 'fsharp',
       \ 'do':  'make fsautocomplete',
       \}
+"Go
+Plug 'fatih/vim-go'
 call plug#end()
 "+==============stop the trainwreck==============+
 
@@ -53,8 +53,7 @@ set tabstop=4
 set shiftwidth=4
 set softtabstop=4
 "spaces if fsharp
-autocmd BufRead,BufNewFile *.fsi,*.fs :set expandtab
-
+au FileType fsi,fs :set expandtab
 set smarttab
 "can make windows size zero
 set winminheight=0
@@ -115,7 +114,7 @@ set number "show line numbers
 set backspace=indent,eol,start
 
 "+=============Scripts===========+
-autocmd BufRead,BufNewFile *.txt,*.tex,*.md setlocal spell "turns on spellcheck for certain file types
+au FileType txt,tex,md setlocal spell "turns on spellcheck for certain file types
 "+===============PLUGINS=================+
 "+================Vim Easy Align==============+
 " Start interactive EasyAlign in visual mode (e.g. vip<Enter>)
@@ -133,38 +132,12 @@ nnoremap <leader>gp :Gpush<CR>
 let g:clang_c_options = '-std=gnu11'
 let g:clang_cpp_options = '-std=c++14'
 "===============Deoplete===============+
-"autocmd BufRead,BufNewFile ! *.{cpp,c,h,rs,rkt,fs,fsi,txt,md,tex} let g:deoplete#enable_at_startup = 1
 let g:deoplete#enable_at_startup = 0
 "+===============Nerdtree=============+
 "close vim if nerdtree is the last thing open
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 "space o toggle nerdtre
 map <Leader>1 :NERDTreeToggle<CR>
-"+==========Rainbow Parenthesis=======+"
-au VimEnter *.rkt,*.xml,*.html,*.clj RainbowParenthesesToggle
-au Syntax * RainbowParenthesesLoadRound
-au Syntax * RainbowParenthesesLoadSquare
-au Syntax * RainbowParenthesesLoadBrnnoremap <C-k> aces
-  "the colors for it
-let g:rbpt_colorpairs = [
-    \ ['brown',       'RoyalBlue3'],
-    \ ['Darkblue',    'SeaGreen3'],
-    \ ['darkgray',    'DarkOrchid3'],
-    \ ['darkgreen',   'firebrick3'],
-    \ ['darkcyan',    'RoyalBlue3'],
-    \ ['darkred',     'SeaGreen3'],
-    \ ['darkmagenta', 'DarkOrchid3'],
-    \ ['brown',       'firebrick3'],
-    \ ['gray',        'RoyalBlue3'],
-    \ ['black',       'SeaGreen3'],
-    \ ['darkmagenta', 'DarkOrchid3'],
-    \ ['Darkblue',    'gray'],
-    \ ['Blue',   'DarkGreen'],
-    \ ['Darkcyan',    'Purple'],
-    \ ['green',     'DarkOrchid3'],
-    \ ['black',         'DarkBlue'],
-    \ ]
-
 "+===========Tagbar============+"
 nnoremap <Leader>2 :TagbarToggle<CR>
 "+==========Undo Tree=========+
@@ -178,7 +151,7 @@ let g:airline#extensions#whitespace#enabled = 0
 set hidden
 let g:racer_cmd = "/usr/bin/racer"
 let $RUST_SRC_PATH="/usr/src/rust/src"
- let g:tagbar_type_rust = {
+let g:tagbar_type_rust = {
     \ 'ctagstype' : 'rust',
     \ 'kinds' : [
         \'T:types,type definitions',
@@ -191,12 +164,22 @@ let $RUST_SRC_PATH="/usr/src/rust/src"
         \'i:impls,trait implementations',
     \]
     \}
+"+========go-vim==========+
+let g:go_fmt_fail_silently = 1
+let g:go_highlight_functions = 1
+let g:go_highlight_methods = 1
+let g:go_highlight_structs = 1
+let g:go_highlight_interfaces = 1
+let g:go_highlight_operators = 1
+let g:go_highlight_build_constraints = 1
+au FileType go nmap <F5> <Plug>(go-run-tab)
 "+===========Unite==========+
 call unite#filters#matcher_default#use(['matcher_fuzzy'])
 call unite#filters#sorter_default#use(['sorter_rank'])
 call unite#custom#source('file,file/new,buffer,file_rec,line', 'matchers', 'matcher_fuzzy')
 nnoremap <C-k> :<C-u>Unite -buffer-name=search -start-insert line<cr>
 "+=====Super Tab======+
-let g:SuperTabDefaultCompletionType = "<c-x><c-o>"
+let g:SuperTabDefaultCompletionType = "context"
+"let g:SuperTabDefaultCompletionType = "<c-x><c-o>"
 "Fix problems with permissions
 set backupdir=~/.config/nvim/backup
