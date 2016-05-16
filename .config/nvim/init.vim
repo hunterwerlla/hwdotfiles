@@ -1,5 +1,6 @@
 "================Vim Plug=======================+
 call plug#begin('~/.nvim/plugged')
+Plug 'https://github.com/justinmk/vim-sneak' "movement plugin
 Plug 'reedes/vim-colors-pencil' "for airline theme
 Plug 'junegunn/seoul256.vim' "best light theme
 Plug 'junegunn/vim-easy-align' "really nice aligning
@@ -34,6 +35,7 @@ Plug 'fsharp/vim-fsharp', {
       \}
 "Go
 Plug 'fatih/vim-go'
+
 call plug#end()
 "+==============stop the trainwreck==============+
 
@@ -185,5 +187,7 @@ nnoremap <C-k> :<C-u>Unite -buffer-name=search -start-insert line<cr>
 "+=====Super Tab======+
 let g:SuperTabDefaultCompletionType = "context"
 "let g:SuperTabDefaultCompletionType = "<c-x><c-o>"
+"+=======Vim Sneak=====+
+let g:sneak#streak = 1
 "Fix problems with permissions
 set backupdir=~/.config/nvim/backup
