@@ -10,6 +10,7 @@ PS1="\[\033[01;37m\]\$? \$(if [[ \$? == 0 ]]; then echo \"\[\033[01;32m\];)\"; e
 export "PYTHONSTARTUP=~/.pyrc"
 export "TERM=xterm-256color"
 export "LIBDIR=/usr/local/lib"
+export PATH=$HOME/Programs/Go:${PATH}
 export "JAVA_HOME=JAVA_HOME=/usr/lib/jvm/jre-openjdk"
 export "GOPATH=/home/hunter/Development/Go/"
 export "GOBIN=/home/hunter/Programs/Go/"

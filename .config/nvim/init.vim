@@ -18,10 +18,10 @@ Plug 'a.vim' "alternate between header files easially :A, :AS to split and switc
 Plug 'justmao945/vim-clang'
 Plug 'majutsushi/tagbar'
 "Autocomplete - for languages without their own system 
-function! DoRemote(arg)
-  UpdateRemotePlugins
-endfunction
-Plug 'Shougo/deoplete.nvim', { 'do': function('DoRemote') }
+"function! DoRemote(arg)
+"  UpdateRemotePlugins
+"endfunction
+"Plug 'Shougo/deoplete.nvim', { 'do': function('DoRemote') }
 "Racket
 Plug 'wlangstroth/vim-racket'
 "Rust
@@ -35,12 +35,20 @@ Plug 'fsharp/vim-fsharp', {
       \}
 "Go
 Plug 'fatih/vim-go'
-
+Plug 'nsf/gocode', { 'rtp': 'nvim', 'do': '~/.config/nvim/plugged/gocode/nvim/symlink.sh' }
+"typescript
+Plug 'scrooloose/syntastic'
+Plug 'leafgarland/typescript-vim'
+Plug 'Quramy/tsuquyomi'
+Plug 'Shougo/vimproc.vim', {
+      \ 'for': 'typescript',
+      \ 'do':  'make',
+      \}
 call plug#end()
-"+==============stop the trainwreck==============+
-
-"this section stops the trainwreck that is default Vim no longer needed in neovim
-"set nocompatible
+"+==============usability==============+
+if $SHELL =~ 'fish'
+  set shell='/bin/sh'
+endif
 "make buffers not annoying
 set hidden
 "enable syntax highlighting
@@ -59,7 +67,6 @@ au FileType fsi,fs :set expandtab
 set smarttab
 "can make windows size zero
 set winminheight=0
-
 "====================Keybinds==================+
 "this makes me not have to use esc yay
 imap jj <Esc>
@@ -134,7 +141,9 @@ nnoremap <leader>gp :Gpush<CR>
 let g:clang_c_options = '-std=gnu11'
 let g:clang_cpp_options = '-std=c++14'
 "===============Deoplete===============+
-let g:deoplete#enable_at_startup = 0
+"let g:deoplete#enable_at_startup = 1
+"let g:deoplete#sources#go#gocode_binary = $GOPATH.'/bin/gocode'
+"let g:deoplete#sources#go#sort_class = ['package', 'func', 'type', 'var', 'const']
 "+===============Nerdtree=============+
 "close vim if nerdtree is the last thing open
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
@@ -174,6 +183,7 @@ let g:go_highlight_structs = 1
 let g:go_highlight_interfaces = 1
 let g:go_highlight_operators = 1
 let g:go_highlight_build_constraints = 1
+filetype plugin indent on
 au FileType go nmap <leader>r <Plug>(go-run-tab)
 au FileType go nmap <leader>b <Plug>(go-build)
 au FileType go nmap <leader>t <Plug>(go-test)
@@ -185,9 +195,19 @@ call unite#filters#sorter_default#use(['sorter_rank'])
 call unite#custom#source('file,file/new,buffer,file_rec,line', 'matchers', 'matcher_fuzzy')
 nnoremap <C-k> :<C-u>Unite -buffer-name=search -start-insert line<cr>
 "+=====Super Tab======+
-let g:SuperTabDefaultCompletionType = "context"
-"let g:SuperTabDefaultCompletionType = "<c-x><c-o>"
+"let g:SuperTabDefaultCompletionType = "context"
+let g:SuperTabDefaultCompletionType = "<c-x><c-o>"
 "+=======Vim Sneak=====+
 let g:sneak#streak = 1
 "Fix problems with permissions
 set backupdir=~/.config/nvim/backup
+"+========Syntastic======+
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+"+=====ts vim====+
