@@ -221,3 +221,7 @@ client.focused #00aaff55 #00aaff55 #ffffffff #dddddd55
 client.focused_inactive #33333333 #33333333 #888888AA #292d2e33
 client.unfocused #00BBFF #333333 #888888 #292d2e
 client.urgent #2f343a #900000 #ffffff #900000
+
+#language
+bindsym $mod+Shift+g exec --no-startup-id "setxkbmap de"
+bindsym $mod+Shift+e exec --no-startup-id "setxkbmap us"
