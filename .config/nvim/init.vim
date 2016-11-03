@@ -17,7 +17,7 @@ Plug 'octol/vim-cpp-enhanced-highlight' "better syntax hilighting
 Plug 'a.vim' "alternate between header files easially :A, :AS to split and switch
 Plug 'justmao945/vim-clang'
 Plug 'majutsushi/tagbar'
-"Autocomplete - for languages without their own system 
+"Autocomplete - for languages without their own system
 "function! DoRemote(arg)
 "  UpdateRemotePlugins
 "endfunction
