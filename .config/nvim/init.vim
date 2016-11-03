@@ -120,8 +120,6 @@ set ruler
 set number "show line numbers
 set backspace=indent,eol,start
 
-"+=============Scripts===========+
-au FileType txt,tex,md setlocal spell "turns on spellcheck for certain file types
 "+===============PLUGINS=================+
 "+================Vim Easy Align==============+
 " Start interactive EasyAlign in visual mode (e.g. vip<Enter>)
