@@ -62,8 +62,6 @@ colo seoul256 "make it lighter
 set tabstop=4
 set shiftwidth=4
 set softtabstop=4
-"spaces if fsharp
-au FileType fsi,fs :set expandtab
 set smarttab
 "can make windows size zero
 set winminheight=0
