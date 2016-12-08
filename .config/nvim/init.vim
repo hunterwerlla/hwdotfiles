@@ -17,7 +17,7 @@ Plug 'octol/vim-cpp-enhanced-highlight' "better syntax hilighting
 Plug 'a.vim' "alternate between header files easially :A, :AS to split and switch
 Plug 'justmao945/vim-clang'
 Plug 'majutsushi/tagbar'
-"Autocomplete - for languages without their own system 
+"Autocomplete - for languages without their own system
 "function! DoRemote(arg)
 "  UpdateRemotePlugins
 "endfunction
@@ -62,8 +62,6 @@ colo seoul256 "make it lighter
 set tabstop=4
 set shiftwidth=4
 set softtabstop=4
-"spaces if fsharp
-au FileType fsi,fs :set expandtab
 set smarttab
 "can make windows size zero
 set winminheight=0
@@ -121,9 +119,6 @@ set ruler
 
 set number "show line numbers
 set backspace=indent,eol,start
-
-"+=============Scripts===========+
-au FileType txt,tex,md setlocal spell "turns on spellcheck for certain file types
 "+===============PLUGINS=================+
 "+================Vim Easy Align==============+
 " Start interactive EasyAlign in visual mode (e.g. vip<Enter>)
@@ -176,19 +171,6 @@ let g:tagbar_type_rust = {
     \]
     \}
 "+========go-vim==========+
-let g:go_fmt_fail_silently = 1
-let g:go_highlight_functions = 1
-let g:go_highlight_methods = 1
-let g:go_highlight_structs = 1
-let g:go_highlight_interfaces = 1
-let g:go_highlight_operators = 1
-let g:go_highlight_build_constraints = 1
-filetype plugin indent on
-au FileType go nmap <leader>r <Plug>(go-run-tab)
-au FileType go nmap <leader>b <Plug>(go-build)
-au FileType go nmap <leader>t <Plug>(go-test)
-au FileType go nmap <Leader>d <Plug>(go-doc-browser)
-let g:go_bin_path = expand("~/Programs/Go")
 "+===========Unite==========+
 call unite#filters#matcher_default#use(['matcher_fuzzy'])
 call unite#filters#sorter_default#use(['sorter_rank'])
