@@ -17,11 +17,9 @@ Plug 'octol/vim-cpp-enhanced-highlight' "better syntax hilighting
 Plug 'a.vim' "alternate between header files easially :A, :AS to split and switch
 Plug 'justmao945/vim-clang'
 Plug 'majutsushi/tagbar'
-"Autocomplete - for languages without their own system
-"function! DoRemote(arg)
-"  UpdateRemotePlugins
-"endfunction
-"Plug 'Shougo/deoplete.nvim', { 'do': function('DoRemote') }
+"Autocomplete
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'zchee/deoplete-go', { 'do': 'make'}
 "Racket
 Plug 'wlangstroth/vim-racket'
 "Rust
@@ -136,9 +134,9 @@ nnoremap <leader>gp :Gpush<CR>
 let g:clang_c_options = '-std=gnu11'
 let g:clang_cpp_options = '-std=c++14'
 "===============Deoplete===============+
-"let g:deoplete#enable_at_startup = 1
-"let g:deoplete#sources#go#gocode_binary = $GOPATH.'/bin/gocode'
-"let g:deoplete#sources#go#sort_class = ['package', 'func', 'type', 'var', 'const']
+let g:deoplete#enable_at_startup = 1
+let g:deoplete#sources#go#gocode_binary = $GOPATH.'/bin/gocode'
+let g:deoplete#sources#go#sort_class = ['package', 'func', 'type', 'var', 'const']
 "+===============Nerdtree=============+
 "close vim if nerdtree is the last thing open
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
