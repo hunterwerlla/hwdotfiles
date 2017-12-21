@@ -11,6 +11,7 @@ automake
 b43-fwcutter
 bash
 bash-completion
+betterdiscord
 bind-tools
 binutils
 bison
@@ -71,6 +72,9 @@ keepass
 less
 lib32-libldap
 lib32-nvidia-utils
+libc++
+libc++abi
+libc++experimental
 libreoffice-fresh
 libtool
 licenses
