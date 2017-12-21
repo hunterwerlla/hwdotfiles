@@ -14,7 +14,6 @@ Plug 'https://github.com/Shougo/unite.vim' "fuzzy search
 Plug 'ervandew/supertab' "makes tab instead of the awful c-x c-o for omnicompleation
 "c/c++ plugins
 Plug 'octol/vim-cpp-enhanced-highlight' "better syntax hilighting
-Plug 'a.vim' "alternate between header files easially :A, :AS to split and switch
 Plug 'justmao945/vim-clang'
 Plug 'majutsushi/tagbar'
 "Autocomplete

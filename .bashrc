@@ -80,10 +80,15 @@ if [ -x /usr/bin/dircolors ]; then
     #alias dir='dir --color=auto'
     #alias vdir='vdir --color=auto'
 
-    alias grep='grep --color=auto'
     alias fgrep='fgrep --color=auto'
     alias egrep='egrep --color=auto'
 fi
+
+#grep = ripgrep
+alias grep='rg'
+
+#vim = neovim 
+alias vim='nvim' 
 
 # some more ls aliases
 alias ll='ls -alF'
@@ -115,5 +120,3 @@ if ! shopt -oq posix; then
 fi
 export GOPATH=~/Programs/Go
 export DISPLAY=:0
-#cd ~
-setterm -blength 0
