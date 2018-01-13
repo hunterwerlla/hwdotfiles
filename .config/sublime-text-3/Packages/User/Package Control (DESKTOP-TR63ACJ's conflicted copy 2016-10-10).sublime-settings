@@ -1,0 +1,25 @@
+{
+	"bootstrapped": true,
+	"in_process_packages":
+	[
+	],
+	"installed_packages":
+	[
+		"All Autocomplete",
+		"AngularJS",
+		"Boxy Theme",
+		"GitGutter",
+		"GoSublime",
+		"Markdown Extended",
+		"Package Control",
+		"PackageSync",
+		"Rust",
+		"RustAutoComplete",
+		"SublimeGit",
+		"SublimeLinter",
+		"SublimeLinter-contrib-clang",
+		"SublimeLinter-contrib-golint",
+		"TOML",
+		"TypeScript"
+	]
+}
