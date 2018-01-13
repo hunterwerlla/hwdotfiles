@@ -7,18 +7,18 @@ Plug 'junegunn/vim-easy-align' "really nice aligning
 Plug 'https://github.com/tpope/vim-fugitive.git' "cool git plugin
 Plug 'https://github.com/scrooloose/nerdtree.git' "File tree for browsing files in a prettier manor
 Plug 'https://github.com/tpope/vim-repeat.git' "plugins repeat too
-Plug 'https://github.com/terryma/vim-multiple-cursors.git' "multiple cursors like sublimetext
+Plug 'terryma/vim-multiple-cursors' "multiple cursors like sublimetext
 Plug 'vim-airline/vim-airline' " fancy status bar
 Plug 'https://github.com/mbbill/undotree.git' "cool undo tree
 Plug 'https://github.com/Shougo/unite.vim' "fuzzy search
 Plug 'ervandew/supertab' "makes tab instead of the awful c-x c-o for omnicompleation
 "c/c++ plugins
 Plug 'octol/vim-cpp-enhanced-highlight' "better syntax hilighting
-Plug 'justmao945/vim-clang'
 Plug 'majutsushi/tagbar'
 "Autocomplete
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'zchee/deoplete-go', { 'do': 'make'}
+Plug 'tweekmonster/deoplete-clang2'
 "Racket
 Plug 'wlangstroth/vim-racket'
 "Rust
@@ -71,8 +71,8 @@ nnoremap <C-b> :bd<CR>
 nnoremap <C-e> 3<C-e>
 nnoremap <C-y> 3<C-y>
 
-"remap leader to `
-let mapleader = "`"
+"remap leader to 
+let mapleader = " "
 
 "move between windows with control+hjkl
 "nmap <silent> <C-k> :wincmd k<CR>
@@ -130,8 +130,7 @@ nnoremap <leader>gp :Gpush<CR>
 "+==========Vim Multiple Cursors=============+
 
 "+===============Vim Clang===============+
-let g:clang_c_options = '-std=gnu11'
-let g:clang_cpp_options = '-std=c++14'
+
 "===============Deoplete===============+
 let g:deoplete#enable_at_startup = 1
 let g:deoplete#sources#go#gocode_binary = $GOPATH.'/bin/gocode'

@@ -11,7 +11,7 @@
 exec --no-startup-id usr/lib/gnome-settings-daemon/gnome-settings-daemon
 
 #startup apps
-exec feh --bg-scale /mnt/c/Users/insta/Pictures/background.jpg
+exec feh --bg-scale ~/.config/background.jpg
 
 for_window [title="Preferences$"] floating enable
 
@@ -20,8 +20,6 @@ for_window [title="Preferences$"] floating enable
 #exec --no-startup-id i3-msg 'workspace 6 _ _; exec gnome-terminal -x alpine'
 #exec --no-startup-id i3-msg 'workspace 7 _ _; exec pragha'
 #exec --no-startup-id i3-msg 'workspace 9 _ _; exec california'
-
-assign [class="^Firefox"] 'workspace 1 _ _'
 
 set $mod Mod1
 # Font for window titles. Will also be used by the bar unless a different font
