@@ -10,12 +10,12 @@ Plug 'https://github.com/tpope/vim-repeat.git' "plugins repeat too
 Plug 'terryma/vim-multiple-cursors' "multiple cursors like sublimetext
 Plug 'vim-airline/vim-airline' " fancy status bar
 Plug 'https://github.com/mbbill/undotree.git' "cool undo tree
-Plug 'https://github.com/Shougo/unite.vim' "fuzzy search
 Plug 'ervandew/supertab' "makes omnicompleation tab instead of the awful c-x c-o for omnicompleation
 Plug 'neomake/neomake' " syntax checking and linting 
 "c/c++ plugins
 Plug 'octol/vim-cpp-enhanced-highlight' "better syntax hilighting
 Plug 'dbgx/lldb.nvim' " lldb
+Plug 'rhysd/vim-clang-format' " vim clang format
 "Autocomplete
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'zchee/deoplete-go', { 'do': 'make'}
@@ -128,7 +128,9 @@ nnoremap <leader>p :Gpush<CR>
 "+==========Vim Multiple Cursors=============+
 
 "+===============Vim Clang===============+
-
+"+===============Vim Clang format===============+
+let g:clang_format#detect_style_file = 1
+let g:clang_format#auto_format = 1
 "===============Deoplete===============+
 let g:deoplete#enable_at_startup = 1
 let g:deoplete#sources#go#gocode_binary = $GOPATH.'/bin/gocode'
@@ -163,11 +165,6 @@ let g:tagbar_type_rust = {
     \]
     \}
 "+========go-vim==========+
-"+===========Unite==========+
-call unite#filters#matcher_default#use(['matcher_fuzzy'])
-call unite#filters#sorter_default#use(['sorter_rank'])
-call unite#custom#source('file,file/new,buffer,file_rec,line', 'matchers', 'matcher_fuzzy')
-nnoremap <C-k> :<C-u>Unite -buffer-name=search -start-insert line<cr>
 "+=====Super Tab======+
 let g:SuperTabDefaultCompletionType = "<c-x><c-o>"
 "+=======Vim Sneak=====+
