@@ -15,7 +15,7 @@ Plug 'ervandew/supertab' "makes omnicompleation tab instead of the awful c-x c-o
 Plug 'neomake/neomake' " syntax checking and linting 
 "c/c++ plugins
 Plug 'octol/vim-cpp-enhanced-highlight' "better syntax hilighting
-Plug 'majutsushi/tagbar'
+Plug 'dbgx/lldb.nvim' " lldb
 "Autocomplete
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'zchee/deoplete-go', { 'do': 'make'}
@@ -80,6 +80,11 @@ nmap <silent> <C-l> :wincmd l<CR>
 "window control
 nmap <silent> <C-s> :split<CR>
 nmap <silent> <C-v> :vsplit<CR>
+" tabs 
+nnoremap <silent> <C-Left> :tabprevious<CR>
+nnoremap <silent> <C-Right> :tabnext<CR>
+nnoremap <silent> <C-Down> :tabclose<CR>
+nnoremap <silent> <C-Up> :tabnew<CR>
 "+=================general changes=============+
 "excessively longer history
 set history=1000
@@ -133,8 +138,6 @@ let g:deoplete#sources#go#sort_class = ['package', 'func', 'type', 'var', 'const
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 "space o toggle nerdtre
 map <Leader>o :NERDTreeToggle<CR>
-"+===========Tagbar============+"
-nnoremap <Leader>t :TagbarToggle<CR>
 "+==========Undo Tree=========+
 nnoremap <Leader>u :UndotreeToggle<CR>
 "+===============airline==============+
@@ -174,3 +177,13 @@ call neomake#configure#automake('w')
 "leder e to see errors
 nnoremap <leader>e :lwindow<CR>
 "+=====ts vim====+
+
+"+====Vim LLDB===+
+nmap <leader>b <Plug>LLBreakSwitch
+nmap <leader>c :LL continue<CR>
+nnoremap <Leader>ds :LLsession new<CR>
+nnoremap <F5> :LLmode debug<CR>
+nnoremap <S-F5> :LLmode code<CR>
+nnoremap <F8> :LL continue<CR>
+nnoremap <F9> :LL print <C-R>=expand('<cword>')<CR>
+vnoremap <F9> :<C-U>LL print <C-R>=lldb#util#get_selection()<CR><CR>
