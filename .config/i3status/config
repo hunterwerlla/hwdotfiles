@@ -27,7 +27,6 @@ volume master {
 	device = "default"
 	mixer = "Master"
 	mixer_idx = 0
-	# termsyn font
 	format = "%volume "
 }
 
